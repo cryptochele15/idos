@@ -1,47 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>idOS Network Quiz</title>
-<style>
-  body {
-    margin:0; font-family:Inter, system-ui, sans-serif;
-    background:#0f172a; color:#f1f5f9; display:flex;
-    justify-content:center; align-items:flex-start; min-height:100vh; padding-top:40px;
-  }
-  .quiz-box {
-    background:#1e293b; padding:30px 40px; border-radius:16px;
-    width:100%; max-width:600px; box-shadow:0 12px 28px rgba(0,0,0,0.4);
-  }
-  h1 { text-align:center; color:#38bdf8; margin-top:0; }
-  h2 { font-size:1.3rem; margin:20px 0 12px; }
-  .options { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
-  .option-btn {
-    background:#334155; padding:14px; border-radius:12px; border:2px solid transparent;
-    cursor:pointer; text-align:left; font-size:0.95rem; transition:all .25s;
-  }
-  .option-btn:hover { background:#475569; }
-  .option-btn.selected { border-color:#38bdf8; background:#1e40af; }
-  .hint { font-size:0.85rem; color:#94a3b8; margin-top:12px; }
-  .controls { text-align:right; margin-top:22px; }
-  button.next-btn {
-    background:#38bdf8; color:#0f172a; font-weight:600;
-    padding:10px 20px; border:none; border-radius:8px; cursor:pointer;
-    transition:background .25s;
-  }
-  button.next-btn:disabled { background:#334155; cursor:default; }
-  .result { text-align:center; font-size:1.1rem; margin-top:20px;}
-</style>
-</head>
-<body>
-<div class="quiz-box">
-  <h1>idOS Network Quiz</h1>
-  <div id="quiz-content">
-    <!-- Question content injected here -->
-  </div>
-</div>
-
 <script>
 const questions = [
   {
@@ -55,50 +11,7 @@ const questions = [
     answer:2,
     hint:"Think about who should own and manage your personal data on the internet."
   },
-  {
-    q:"Which feature best describes idOS’s approach to KYC?",
-    options:[
-      "One-time KYC per application only",
-      "Centralized storage of IDs with public access",
-      "Reusable KYC credentials that can be consented and shared",
-      "Anonymity-first with no verification"
-    ],
-    answer:2,
-    hint:"Focus on reusability and consent."
-  },
-  {
-    q:"Which is a component of idOS architecture?",
-    options:[
-      "Storage Network for identity data & Economy Network for governance",
-      "Video streaming CDN",
-      "Desktop OS kernel",
-      "Proprietary email service"
-    ],
-    answer:0,
-    hint:"It includes storage and economic governance layers."
-  },
-  {
-    q:"How does idOS handle regulatory compliance & privacy?",
-    options:[
-      "By making all data public on-chain",
-      "Using consented, privacy-preserving credential sharing & compliance modules",
-      "Requiring users to email regulators manually",
-      "Removing KYC requirements entirely"
-    ],
-    answer:1,
-    hint:"It balances privacy with compliance, not by publishing raw data."
-  },
-  {
-    q:"Which is a realistic use case for idOS?",
-    options:[
-      "Neobanks reusing verified KYC credentials to onboard faster",
-      "Printing physical ID cards only",
-      "Acting as a videogame engine",
-      "Serving as a social network replacement"
-    ],
-    answer:0,
-    hint:"Financial onboarding is a key use case."
-  }
+  // ... other questions ...
 ];
 
 let current = 0;
@@ -118,15 +31,24 @@ function renderQuestion(){
     </div>
   `;
 }
+
 function selectOption(i){
-  document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
-  document.querySelectorAll('.option-btn')[i].classList.add('selected');
+  const correct = questions[current].answer;
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach(b=>b.onclick=null); // disable further clicks
+
+  if(i === correct){
+    btns[i].classList.add('correct');
+    score++;
+  } else {
+    btns[i].classList.add('wrong');
+    btns[correct].classList.add('correct');
+  }
+
   document.getElementById('nextBtn').disabled = false;
-  document.getElementById('nextBtn').dataset.selected = i;
 }
+
 function nextQuestion(){
-  const chosen = parseInt(document.getElementById('nextBtn').dataset.selected,10);
-  if(chosen===questions[current].answer) score++;
   current++;
   if(current<questions.length){
     renderQuestion();
@@ -139,7 +61,6 @@ function nextQuestion(){
     `;
   }
 }
+
 renderQuestion();
 </script>
-</body>
-</html>
