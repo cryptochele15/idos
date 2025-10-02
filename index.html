@@ -1,98 +1,145 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>idOS Quiz</title>
+<title>idOS Network Quiz</title>
 <style>
-  body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fa;margin:0;padding:30px;}
-  h1{text-align:center;color:#0f172a;}
-  .quiz-container{max-width:800px;margin:0 auto;background:#fff;padding:25px;border-radius:10px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);}
-  .question{margin-bottom:25px;}
-  .question h3{margin:0 0 12px;color:#1e293b;}
-  .option{margin:6px 0;padding:6px;border-radius:6px;cursor:pointer;}
-  input[type="radio"]{margin-right:8px;}
-  button{background:#2563eb;color:#fff;padding:10px 18px;font-size:1rem;border:none;border-radius:6px;
-    cursor:pointer;display:block;margin:20px auto;}
-  button:hover{background:#1d4ed8;}
-  .result{margin-top:20px;text-align:center;font-size:1.1rem;}
-  .correct{background:#dcfce7;}
-  .wrong{background:#fee2e2;}
+  body {
+    margin:0; font-family:Inter, system-ui, sans-serif;
+    background:#0f172a; color:#f1f5f9; display:flex;
+    justify-content:center; align-items:flex-start; min-height:100vh; padding-top:40px;
+  }
+  .quiz-box {
+    background:#1e293b; padding:30px 40px; border-radius:16px;
+    width:100%; max-width:600px; box-shadow:0 12px 28px rgba(0,0,0,0.4);
+  }
+  h1 { text-align:center; color:#38bdf8; margin-top:0; }
+  h2 { font-size:1.3rem; margin:20px 0 12px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
+  .option-btn {
+    background:#334155; padding:14px; border-radius:12px; border:2px solid transparent;
+    cursor:pointer; text-align:left; font-size:0.95rem; transition:all .25s;
+  }
+  .option-btn:hover { background:#475569; }
+  .option-btn.selected { border-color:#38bdf8; background:#1e40af; }
+  .hint { font-size:0.85rem; color:#94a3b8; margin-top:12px; }
+  .controls { text-align:right; margin-top:22px; }
+  button.next-btn {
+    background:#38bdf8; color:#0f172a; font-weight:600;
+    padding:10px 20px; border:none; border-radius:8px; cursor:pointer;
+    transition:background .25s;
+  }
+  button.next-btn:disabled { background:#334155; cursor:default; }
+  .result { text-align:center; font-size:1.1rem; margin-top:20px;}
 </style>
 </head>
 <body>
-  <h1>idOS — MCQ Quiz</h1>
-  <div class="quiz-container" id="quiz">
-    
-    <div class="question" data-answer="B">
-      <h3>1. What is the primary goal of idOS?</h3>
-      <label class="option"><input type="radio" name="q1" value="A">A) Create a new blockchain for payments</label>
-      <label class="option"><input type="radio" name="q1" value="B">B) Enable portable, reusable digital identity and KYC across ecosystems</label>
-      <label class="option"><input type="radio" name="q1" value="C">C) Replace all banks with decentralized exchanges</label>
-      <label class="option"><input type="radio" name="q1" value="D">D) Provide hardware wallets for institutions</label>
-    </div>
-
-    <div class="question" data-answer="C">
-      <h3>2. Which feature best describes idOS’s approach to KYC?</h3>
-      <label class="option"><input type="radio" name="q2" value="A">A) One-time KYC per application only</label>
-      <label class="option"><input type="radio" name="q2" value="B">B) Centralized storage of IDs with public access</label>
-      <label class="option"><input type="radio" name="q2" value="C">C) Reusable KYC credentials that can be consented and shared</label>
-      <label class="option"><input type="radio" name="q2" value="D">D) Anonymity-first with no verification</label>
-    </div>
-
-    <div class="question" data-answer="A">
-      <h3>3. Which is a component of idOS architecture?</h3>
-      <label class="option"><input type="radio" name="q3" value="A">A) Storage Network for identity data & Economy Network for governance</label>
-      <label class="option"><input type="radio" name="q3" value="B">B) Video streaming CDN</label>
-      <label class="option"><input type="radio" name="q3" value="C">C) Desktop OS kernel</label>
-      <label class="option"><input type="radio" name="q3" value="D">D) Proprietary email service</label>
-    </div>
-
-    <div class="question" data-answer="B">
-      <h3>4. How does idOS handle regulatory compliance & privacy?</h3>
-      <label class="option"><input type="radio" name="q4" value="A">A) By making all data public on-chain</label>
-      <label class="option"><input type="radio" name="q4" value="B">B) Using consented, privacy-preserving credential sharing & compliance modules</label>
-      <label class="option"><input type="radio" name="q4" value="C">C) Requiring users to email regulators manually</label>
-      <label class="option"><input type="radio" name="q4" value="D">D) Removing KYC requirements entirely</label>
-    </div>
-
-    <div class="question" data-answer="A">
-      <h3>5. Which is a realistic use case for idOS?</h3>
-      <label class="option"><input type="radio" name="q5" value="A">A) Neobanks reusing verified KYC credentials to onboard faster</label>
-      <label class="option"><input type="radio" name="q5" value="B">B) Printing physical ID cards only</label>
-      <label class="option"><input type="radio" name="q5" value="C">C) Acting as a videogame engine</label>
-      <label class="option"><input type="radio" name="q5" value="D">D) Serving as a social network replacement</label>
-    </div>
-
-    <button onclick="checkAnswers()">Check Answers</button>
-    <div id="result" class="result"></div>
+<div class="quiz-box">
+  <h1>idOS Network Quiz</h1>
+  <div id="quiz-content">
+    <!-- Question content injected here -->
   </div>
+</div>
 
 <script>
-function checkAnswers(){
-  let score=0;
-  const questions=document.querySelectorAll('.question');
-  questions.forEach(q=>{
-    const correct=q.dataset.answer;
-    const selected=q.querySelector('input[type=radio]:checked');
-    q.querySelectorAll('.option').forEach(opt=>{
-      opt.classList.remove('correct','wrong');
-    });
-    if(selected){
-      if(selected.value===correct){
-        score++;
-        selected.parentElement.classList.add('correct');
-      }else{
-        selected.parentElement.classList.add('wrong');
-        q.querySelector(`input[value=${correct}]`).parentElement.classList.add('correct');
-      }
-    }else{
-      q.querySelector(`input[value=${correct}]`).parentElement.classList.add('correct');
-    }
-  });
-  document.getElementById('result').textContent=`You scored ${score} / ${questions.length}`;
+const questions = [
+  {
+    q: "What is the primary goal of the idOS network?",
+    options: [
+      "To create a new stablecoin for the crypto market.",
+      "To provide a centralized database for storing user KYC data.",
+      "To give users control over their digital identity in a portable and private way.",
+      "To build a social media platform on the blockchain."
+    ],
+    answer:2,
+    hint:"Think about who should own and manage your personal data on the internet."
+  },
+  {
+    q:"Which feature best describes idOS’s approach to KYC?",
+    options:[
+      "One-time KYC per application only",
+      "Centralized storage of IDs with public access",
+      "Reusable KYC credentials that can be consented and shared",
+      "Anonymity-first with no verification"
+    ],
+    answer:2,
+    hint:"Focus on reusability and consent."
+  },
+  {
+    q:"Which is a component of idOS architecture?",
+    options:[
+      "Storage Network for identity data & Economy Network for governance",
+      "Video streaming CDN",
+      "Desktop OS kernel",
+      "Proprietary email service"
+    ],
+    answer:0,
+    hint:"It includes storage and economic governance layers."
+  },
+  {
+    q:"How does idOS handle regulatory compliance & privacy?",
+    options:[
+      "By making all data public on-chain",
+      "Using consented, privacy-preserving credential sharing & compliance modules",
+      "Requiring users to email regulators manually",
+      "Removing KYC requirements entirely"
+    ],
+    answer:1,
+    hint:"It balances privacy with compliance, not by publishing raw data."
+  },
+  {
+    q:"Which is a realistic use case for idOS?",
+    options:[
+      "Neobanks reusing verified KYC credentials to onboard faster",
+      "Printing physical ID cards only",
+      "Acting as a videogame engine",
+      "Serving as a social network replacement"
+    ],
+    answer:0,
+    hint:"Financial onboarding is a key use case."
+  }
+];
+
+let current = 0;
+let score = 0;
+
+function renderQuestion(){
+  const c = questions[current];
+  document.getElementById('quiz-content').innerHTML = `
+    <h2>Question ${current+1} of ${questions.length}</h2>
+    <p>${c.q}</p>
+    <div class="options">
+      ${c.options.map((opt,i)=>`<div class="option-btn" onclick="selectOption(${i})">${opt}</div>`).join('')}
+    </div>
+    <div class="hint"><em>Hint:</em> ${c.hint}</div>
+    <div class="controls">
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+    </div>
+  `;
 }
+function selectOption(i){
+  document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll('.option-btn')[i].classList.add('selected');
+  document.getElementById('nextBtn').disabled = false;
+  document.getElementById('nextBtn').dataset.selected = i;
+}
+function nextQuestion(){
+  const chosen = parseInt(document.getElementById('nextBtn').dataset.selected,10);
+  if(chosen===questions[current].answer) score++;
+  current++;
+  if(current<questions.length){
+    renderQuestion();
+  } else {
+    document.getElementById('quiz-content').innerHTML = `
+      <div class="result">
+        <h2>Quiz Complete!</h2>
+        <p>You scored ${score} out of ${questions.length}</p>
+      </div>
+    `;
+  }
+}
+renderQuestion();
 </script>
 </body>
 </html>
