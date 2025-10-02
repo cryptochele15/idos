@@ -1,93 +1,98 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>idOS — 5 MCQ Quiz (README)</title>
-  <style>
-    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; max-width:800px; margin:40px auto; line-height:1.5; padding:0 18px; color:#0f172a; }
-    h1 { font-size:1.8rem; margin-bottom:8px; }
-    p.lead { color:#475569; margin-top:0; }
-    .card { border:1px solid #e6e9ee; padding:18px; border-radius:10px; margin:18px 0; background:#fff; box-shadow:0 6px 18px rgba(15,23,42,0.03); }
-    ol { padding-left:18px; }
-    .options { margin:8px 0 14px 0; }
-    .option { margin:6px 0; }
-    details { margin-top:12px; }
-    summary { cursor:pointer; font-weight:600; }
-    footer { color:#64748b; font-size:0.9rem; margin-top:28px; }
-    code { background:#f1f5f9; padding:2px 6px; border-radius:6px; font-size:0.95em; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>idOS Quiz</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fa;margin:0;padding:30px;}
+  h1{text-align:center;color:#0f172a;}
+  .quiz-container{max-width:800px;margin:0 auto;background:#fff;padding:25px;border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);}
+  .question{margin-bottom:25px;}
+  .question h3{margin:0 0 12px;color:#1e293b;}
+  .option{margin:6px 0;padding:6px;border-radius:6px;cursor:pointer;}
+  input[type="radio"]{margin-right:8px;}
+  button{background:#2563eb;color:#fff;padding:10px 18px;font-size:1rem;border:none;border-radius:6px;
+    cursor:pointer;display:block;margin:20px auto;}
+  button:hover{background:#1d4ed8;}
+  .result{margin-top:20px;text-align:center;font-size:1.1rem;}
+  .correct{background:#dcfce7;}
+  .wrong{background:#fee2e2;}
+</style>
 </head>
 <body>
-  <h1>idOS — Quick MCQ Quiz</h1>
-  <p class="lead">Five multiple-choice questions about idOS. Answers are included in the <strong>Answers</strong> section below.</p>
+  <h1>idOS — MCQ Quiz</h1>
+  <div class="quiz-container" id="quiz">
+    
+    <div class="question" data-answer="B">
+      <h3>1. What is the primary goal of idOS?</h3>
+      <label class="option"><input type="radio" name="q1" value="A">A) Create a new blockchain for payments</label>
+      <label class="option"><input type="radio" name="q1" value="B">B) Enable portable, reusable digital identity and KYC across ecosystems</label>
+      <label class="option"><input type="radio" name="q1" value="C">C) Replace all banks with decentralized exchanges</label>
+      <label class="option"><input type="radio" name="q1" value="D">D) Provide hardware wallets for institutions</label>
+    </div>
 
-  <div class="card">
-    <ol>
-      <li>
-        <strong>What is the primary goal of idOS?</strong>
-        <div class="options">
-          <div class="option">A) Create a new blockchain specifically for payments</div>
-          <div class="option">B) Enable portable, reusable digital identity and KYC across on-chain and off-chain systems</div>
-          <div class="option">C) Replace all banks with decentralized exchanges</div>
-          <div class="option">D) Provide hardware wallets for institutional investors</div>
-      </li>
+    <div class="question" data-answer="C">
+      <h3>2. Which feature best describes idOS’s approach to KYC?</h3>
+      <label class="option"><input type="radio" name="q2" value="A">A) One-time KYC per application only</label>
+      <label class="option"><input type="radio" name="q2" value="B">B) Centralized storage of IDs with public access</label>
+      <label class="option"><input type="radio" name="q2" value="C">C) Reusable KYC credentials that can be consented and shared</label>
+      <label class="option"><input type="radio" name="q2" value="D">D) Anonymity-first with no verification</label>
+    </div>
 
-      <li>
-        <strong>Which feature best describes idOS’s approach to KYC?</strong>
-        <div class="options">
-          <div class="option">A) One-time KYC per application only</div>
-          <div class="option">B) Centralized storage of government IDs with open public access</div>
-          <div class="option">C) Reusable KYC credentials that can be consented and shared across services</div>
-          <div class="option">D) Anonymity-first model with no identity verification</div>
-        </div>
-      </li>
+    <div class="question" data-answer="A">
+      <h3>3. Which is a component of idOS architecture?</h3>
+      <label class="option"><input type="radio" name="q3" value="A">A) Storage Network for identity data & Economy Network for governance</label>
+      <label class="option"><input type="radio" name="q3" value="B">B) Video streaming CDN</label>
+      <label class="option"><input type="radio" name="q3" value="C">C) Desktop OS kernel</label>
+      <label class="option"><input type="radio" name="q3" value="D">D) Proprietary email service</label>
+    </div>
 
-      <li>
-        <strong>Which of these is a component commonly associated with idOS architecture?</strong>
-        <div class="options">
-          <div class="option">A) Storage Network for identity data and an Economy Network for governance/token flows</div>
-          <div class="option">B) Video streaming CDN only</div>
-          <div class="option">C) Desktop OS kernel</div>
-          <div class="option">D) Proprietary email service</div>
-        </div>
-      </li>
+    <div class="question" data-answer="B">
+      <h3>4. How does idOS handle regulatory compliance & privacy?</h3>
+      <label class="option"><input type="radio" name="q4" value="A">A) By making all data public on-chain</label>
+      <label class="option"><input type="radio" name="q4" value="B">B) Using consented, privacy-preserving credential sharing & compliance modules</label>
+      <label class="option"><input type="radio" name="q4" value="C">C) Requiring users to email regulators manually</label>
+      <label class="option"><input type="radio" name="q4" value="D">D) Removing KYC requirements entirely</label>
+    </div>
 
-      <li>
-        <strong>How does idOS aim to handle regulatory compliance and privacy?</strong>
-        <div class="options">
-          <div class="option">A) By making all identity data public on-chain</div>
-          <div class="option">B) Using consented, privacy-preserving credential sharing and compliance modules</div>
-          <div class="option">C) Requiring users to email regulators manually</div>
-          <div class="option">D) Removing KYC requirements entirely</div>
-        </div>
-      </li>
+    <div class="question" data-answer="A">
+      <h3>5. Which is a realistic use case for idOS?</h3>
+      <label class="option"><input type="radio" name="q5" value="A">A) Neobanks reusing verified KYC credentials to onboard faster</label>
+      <label class="option"><input type="radio" name="q5" value="B">B) Printing physical ID cards only</label>
+      <label class="option"><input type="radio" name="q5" value="C">C) Acting as a videogame engine</label>
+      <label class="option"><input type="radio" name="q5" value="D">D) Serving as a social network replacement</label>
+    </div>
 
-      <li>
-        <strong>Which is a realistic use case for idOS?</strong>
-        <div class="options">
-          <div class="option">A) Neobanks reusing verified KYC credentials to onboard customers faster</div>
-          <div class="option">B) Printing physical ID cards only</div>
-          <div class="option">C) Acting as a videogame engine</div>
-          <div class="option">D) Serving as a social network replacement</div>
-        </div>
-      </li>
-    </ol>
-
-    <details>
-      <summary>Answers (click to reveal)</summary>
-      <ol>
-        <li><strong>Q1 — B</strong><br/>idOS’s main objective is to enable portable, reusable digital identity (including KYC) across on-chain and off-chain ecosystems.</li>
-        <li><strong>Q2 — C</strong><br/>idOS promotes reusable, consented KYC credentials so users and services can share verified identity information without repeating full KYC flows.</li>
-        <li><strong>Q3 — A</strong><br/>idOS architecture typically references components like a Storage Network (identity data, credentials) and an Economy Network (tokens, incentives, governance).</li>
-        <li><strong>Q4 — B</strong><br/>idOS balances privacy and compliance via consented credential sharing and compliance tooling rather than exposing raw identity data publicly.</li>
-        <li><strong>Q5 — A</strong><br/>A common idOS use case: neobanks or financial services reusing verified credentials for faster, compliant onboarding.</li>
-      </ol>
-    </details>
-
-    <footer>
-      Notes: This quiz is a concise summary for README use. For deeper technical details consult the official idOS docs.
-    </footer>
+    <button onclick="checkAnswers()">Check Answers</button>
+    <div id="result" class="result"></div>
   </div>
+
+<script>
+function checkAnswers(){
+  let score=0;
+  const questions=document.querySelectorAll('.question');
+  questions.forEach(q=>{
+    const correct=q.dataset.answer;
+    const selected=q.querySelector('input[type=radio]:checked');
+    q.querySelectorAll('.option').forEach(opt=>{
+      opt.classList.remove('correct','wrong');
+    });
+    if(selected){
+      if(selected.value===correct){
+        score++;
+        selected.parentElement.classList.add('correct');
+      }else{
+        selected.parentElement.classList.add('wrong');
+        q.querySelector(`input[value=${correct}]`).parentElement.classList.add('correct');
+      }
+    }else{
+      q.querySelector(`input[value=${correct}]`).parentElement.classList.add('correct');
+    }
+  });
+  document.getElementById('result').textContent=`You scored ${score} / ${questions.length}`;
+}
+</script>
 </body>
 </html>
